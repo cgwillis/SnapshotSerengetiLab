@@ -1,0 +1,75 @@
+
+source('boxplotGenerate.R')
+
+boxplotTab <- tabItem(
+  tabName <- 'boxplot',
+  
+  # Row for description and data filters
+  fluidRow(
+    box(width=4,
+      h2('Boxplots - comparing categorical and continuous variables'),
+      'Boxplots are useful graphs for exploring the relationship between a categorical variable and a continuous variable.', br(), br(),
+      'In this boxplot, the categorical variable is presented on the X-axis, and the continuous variable on the Y-axis. The top and bottom of the box correspond to the 25% and 75% percentiles of the data. The whiskers indicate the ~95% percentiles of the data. Data beyond the end of the whiskers are called "outlying" points and are plotted individually. The line in the center of the box represents the median.', br(), br(),
+      'You can use the filters to narrow down what photos you are interested in. You can also select multiple species to compare. The data for each species will be represented by a different color.', br(),
+      h2('Data Filters'),
+      selectInput(inputId = "y_box", 
+                  label = "y-axis", 
+                  choices = continuous_vars,
+                  selected = "Distance_to_River_m"),
+      multiInput(inputId='species_box',
+                 label='Select Species (1-5 species):',
+                 choices=species_list,
+                 selected=c('aardvark')),
+      switchInput(inputId='advanced_options_selected_box',
+                  label='Show Advanced options',
+                  value=FALSE),
+      
+      conditionalPanel(condition='input.advanced_options_selected_box == true',
+                       checkboxGroupInput(inputId = "standing_box",
+                                          label = "Standing",
+                                          choices = standing_list,
+                                          selected = c("Not standing", "Standing")),
+                       checkboxGroupInput(inputId = "resting_box",
+                                          label = "Resting",
+                                          choices = resting_list,
+                                          selected = c("Not resting", "Resting")),
+                       checkboxGroupInput(inputId = "moving_box",
+                                          label = "Moving",
+                                          choices = moving_list,
+                                          selected = c("Not moving", "Moving")),
+                       checkboxGroupInput(inputId = "eating_box",
+                                          label = "Eating",
+                                          choices = eating_list,
+                                          selected = c("Not eating", "Eating")),
+                       checkboxGroupInput(inputId = "interacting_box",
+                                          label = "Interacting",
+                                          choices = interacting_list,
+                                          selected = c("Not interacting", "Interacting")),
+                       checkboxGroupInput(inputId = "babies_box",
+                                          label = "Babies",
+                                          choices = babies_list,
+                                          selected = c("No babies", "Babies")),
+                       checkboxGroupInput(inputId ="habitat_box",
+                                          label = "Habitat (select any or all)",
+                                          choices = habitat_list,
+                                          selected = c("Dense Woodland",
+                                                       "Grassland w/Trees",
+                                                       "Open Grassland",
+                                                       "Open Woodland/Shrubs")),
+                       dateRangeInput(inputId ="date_box",
+                                      label = "Select date range",
+                                      start  = startDate,
+                                      end    = endDate,
+                                      min    = startDate,
+                                      max    = endDate,
+                                      format = "mm/dd/yy",
+                                      separator = " - "))
+    ),
+    box(width=8,
+        h2('Output:'),
+        plotOutput('boxplotRender'),
+        downloadButton('boxDownload', 'Download')
+    )
+  )
+  
+)
