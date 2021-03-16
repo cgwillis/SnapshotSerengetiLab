@@ -11,7 +11,7 @@ spatialplotTab <- tabItem(
         'You can use the filters to narrow down what photos you are interested in. Click the advance option to select additional filters. You can also select multiple species to compare. The data for each species will be represented by a different color.', br(),
         h2('Data Filters:'),
         multiInput(inputId='species_spatial',
-                   label='Select Species (1-5 species):',
+                   label='Select Up to Two Species at Time',
                    choices=species_list,
                    selected=c('cheetah')),
         switchInput(inputId='advanced_options_selected_spatial',
@@ -19,7 +19,7 @@ spatialplotTab <- tabItem(
                     value=FALSE),
         conditionalPanel(condition='input.advanced_options_selected_spatial == true',
                          selectInput(inputId = "meta_spatial", 
-                                     label = "Metadata variable", 
+                                     label = "Metadata variable (log transformed)", 
                                      choices = continuous_vars_no_log,
                                      selected = 'Greeness_Dry'),
                          checkboxGroupInput(inputId = "standing_spatial",
@@ -63,6 +63,7 @@ spatialplotTab <- tabItem(
                                         separator = " - "))
     ),
     box(width=8,
+        height = "100%",
         h2('Output'),
         mapviewOutput('spatialplotRender')
     )

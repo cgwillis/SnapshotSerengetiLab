@@ -1,0 +1,57 @@
+Name of File: V3_Kopjes
+
+Source of Data (institute): TWCM/FZS, Institute of Resource Assesment (UDar), Aster imagery (2002)
+
+Person to contact: Honori Maliti, Grant Hopcraft
+
+How was data collected: Digitized from 1:50,000 map sheets using a tablet, screen digitizing from Aster imagery
+
+Description of data: polygons describing kopjes in Serengeti 
+
+Projection: UTM Zone36
+
+Datum: Arc1960
+
+Date Aquired: 1998, 2007
+
+Modification	1: Adding in more kopjes from Aster imagery (2002) especially in Loliondo, Maswa, and Mugumu areas
+		2: Corrected projection problems (Arc1960 and WGS84 confusions)
+		3:
+
+Date Modified	1: May 2007
+		2: June 2008
+		3:
+
+Modified by whom1: Grant Hocpraft
+		2: Stephanie Eby
+		3:
+
+Reason for modification	1: Additional kopjes for Management Map
+			2: Correction to projections
+			3:
+
+Possible sources of error: Possible error incurred while digitizing, some kopjes in northern and southern extents are missing, 
+
+Improvement suggestions: Go through map sheets and ensure all kopjes are present, check Google Earth for kopje locations.
+
+Data missing: some kopjes in northern and southern extents
+
+Who has used data:
+
+Contact of people who have used data:
+
+Associated files and databases:
+
+
+
+Grant Hopcraft
+FZS
+Serengeti GIS and Database Center
+granthopcraft@fzs.org
+
+
+
+
+
+
+

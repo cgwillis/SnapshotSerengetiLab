@@ -168,7 +168,7 @@ habitat_list <- c("Dense Woodland",
                   "Grassland w/Trees",
                   "Open Grassland",
                   "Open Woodland/Shrubs")
-year_list <- c(2010, 2011, 2012, 2013)
+year_list <- c(2010, 2011, 2012, 2013,2014,2015)
 
 species_list <- c("aardvark", "aardwolf", "baboon", "batEaredFox", "buffalo", "bushbuck",
                   "caracal", "cheetah", "civet", "dikDik", "eland", "elephant", "gazelleGrants",

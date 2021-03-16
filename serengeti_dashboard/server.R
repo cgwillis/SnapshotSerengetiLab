@@ -1,3 +1,17 @@
+# rsconnect::deployApp('~/Documents/GitHub/SnapshotSerengetiLab/serengeti_dashboard/')
+library(rsconnect)
+library(raster)
+library(sf)
+library(rgdal)
+library(mapview)
+library(lattice)
+library(leafpop)
+library(RColorBrewer)
+library(ggplot2)
+library(ggridges)
+library(tidyverse)
+library(plyr)
+library(rgeos)
 
 source('barGenerate.R')
 source('violinGenerate.R')
@@ -10,11 +24,11 @@ source('spatialGenerate.R')
 server <- function(input, output) {
   
   dataInput <- reactive({
-    getSerengetiData('../../Full_Serengeti_Data_OLD.csv')
+    getSerengetiData('S1-11_filtered.csv')
   })
   
   kopjesInput <- reactive({
-    readOGR("../../Kopjes/V3_Kopjes_ARC1960.shp")
+    readOGR("Kopjes/V3_Kopjes_ARC1960.shp")
   })
   
   # Spatial Distribution Output
