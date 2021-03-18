@@ -1,0 +1,12 @@
+name: serengeti_data_preview
+title: serengeti_data_preview
+username:
+account: btl-cbs-umn
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3814655
+bundleId: 4363989
+url: https://btl-cbs-umn.shinyapps.io/serengeti_data_preview/
+when: 1616078060.57043
+asMultiple: FALSE
+asStatic: FALSE

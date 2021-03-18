@@ -1,0 +1,13 @@
+name: serengeti_cont_by_species
+title: serengeti_cont_by_species
+username:
+account: btl-cbs-umn
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3814748
+bundleId: 4364097
+url: https://btl-cbs-umn.shinyapps.io/serengeti_cont_by_species/
+when: 1616079376.79843
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData
