@@ -63,9 +63,8 @@ spatialplotTab <- tabItem(
                                         separator = " - "))
     ),
     box(width=8,
-        height = "100%",
         h2('Output'),
-        mapviewOutput('spatialplotRender')
+        mapviewOutput('spatialplotRender', height=800) # Here is where we can change height
     )
   )
 )
