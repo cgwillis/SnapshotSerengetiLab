@@ -5,6 +5,6 @@ account: btl-cbs-umn
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 3775348
-bundleId: 4355098
+bundleId: 4385938
 url: https://btl-cbs-umn.shinyapps.io/serengeti_dashboard/
-when: 1615929400.28922
+when: 1616526010.2228

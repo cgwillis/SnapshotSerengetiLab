@@ -5,9 +5,9 @@ account: btl-cbs-umn
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 3814692
-bundleId: 4364026
+bundleId: 4413456
 url: https://btl-cbs-umn.shinyapps.io/serengeti_wildebeest_hypothesis/
-when: 1616078617.29144
+when: 1617139146.61557
 asMultiple: FALSE
 asStatic: FALSE
 ignoredFiles: .RData

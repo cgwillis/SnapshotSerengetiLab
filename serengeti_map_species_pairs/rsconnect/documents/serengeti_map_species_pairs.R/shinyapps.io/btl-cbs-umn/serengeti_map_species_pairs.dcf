@@ -1,0 +1,13 @@
+name: serengeti_map_species_pairs
+title: serengeti_map_species_pairs
+username:
+account: btl-cbs-umn
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3814783
+bundleId: 4364124
+url: https://btl-cbs-umn.shinyapps.io/serengeti_map_species_pairs/
+when: 1616079693.15336
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData

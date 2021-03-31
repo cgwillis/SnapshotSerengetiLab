@@ -13,7 +13,7 @@ Serengeti <-read.csv("S1-11_wildebeest.csv")
 Serengeti$Season <- "Inter" 
 Serengeti$Season[Serengeti$Month..1.Jan.. %in% c(6,7,8,9,10)]  <- "Dry"
 Serengeti$Season[Serengeti$Month..1.Jan.. %in% c(11,12,1,2,3,4) ] <- "Wet"
-
+Serengeti$Month..1.Jan.. <- as.factor(Serengeti$Month..1.Jan..)
 # Create wet and dry season datasets
 Wilde <- filter(Serengeti, Species == "wildebeest" & Season != "Inter")
 
@@ -22,14 +22,14 @@ Wilde <- filter(Serengeti, Species == "wildebeest" & Season != "Inter")
 contVarList = c("Amount.of.Shade", "Distance.to.River..m.",
                 "Distance.to.Confluence..m.","Distance.to.Kopje..m.",
                 "Tree.Density.Measure",
-                "Greeness..Dry." )
+                "Greeness..Dry.", "Greeness..Wet.")
 contVarNames = c("Shade (0-4 scale)","Distance to river (m)",
                  "Distance to confluence (m)", "Distance to kopje (m)",
                  "Ave. distance to trees (m)",
-                 "Greenness, dry season")
+                 "Greenness, dry season", "Greenness, wet season")
 
 
-caption = "Environmental values at cameras where wildebeest were recorded during the Wet (Nov-Apr) and Dry (June-October) seasons, excluding the transitional month of May. Boxes show the interquartile range, horizontal line is the median, diamond is the mean value. Whiskers show the values of points included within 1.5 times the intnerquartile range, values outside of this range (outliers) are represented by open circles"   
+caption = "Environmental values at cameras where wildebeest were recorded by month. Boxes show the interquartile range, horizontal line is the median, diamond is the mean value. Whiskers show the values of points included within 1.5 times the intnerquartile range, values outside of this range (outliers) are represented by open circles"   
 
 
 # UI ###################################
@@ -82,44 +82,37 @@ server <-
         
         
         #Row 1 output
-        output$wildeGraph <- renderPlot({
-            
-        ggplot(Wilde,aes_string(x="Season", y=input$contVar)) +
+        data <- reactiveValues()
+        observeEvent(input$contVar,{
+            data$plot <-  ggplot(Wilde,aes_string(x="Month..1.Jan..", y=input$contVar)) +
                 geom_boxplot(outlier.colour="black", outlier.shape=1, outlier.size=4) +
                 theme_gray(base_size = 22) +
                 ylab(contVarNames[match(input$contVar,contVarList)]) +
-                stat_summary(fun=mean, geom="point", shape=9, size=8)
-                
-        })
-
+                stat_summary(fun=mean, geom="point", shape=9, size=8)})
             
-# DOWNLOADS
+            output$wildeGraph <- renderPlot({ data$plot })
+
         
-# downloadHandler contains 2 arguments as functions, namely filename, content
-# code from: https://gist.github.com/aagarw30/6c10d6d92f5d512cae41
+        # DOWNLOADS
         
-output$downWildeGraph <- downloadHandler(
-    filename =  function() {
+        # downloadHandler contains 2 arguments as functions, namely filename, content
+        # code from: https://gist.github.com/aagarw30/6c10d6d92f5d512cae41
+        
+        output$downWildeGraph <- downloadHandler(
+            filename =  function() {
                 st=format(Sys.time(), "%Y-%m-%d_%H:%M")
                 paste(st,"Boxplot", ".pdf", sep="")
             },
-# content is a function with argument file. content writes the plot to the device
+            # content is a function with argument file. content writes the plot to the device
             content = function(file) {
-                
-                pdf(file) # open the pdf device
-
-                #PLOT
-
-                
-               
-                dev.off()  # turn the device off
+                ggsave(file,plot=data$plot)
             } 
         ) #end download handler
         
         
         
-
-} # end server -> function()
+        
+    } # end server -> function()
 
 
 # Run the application 
