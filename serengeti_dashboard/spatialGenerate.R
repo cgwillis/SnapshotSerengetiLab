@@ -54,6 +54,10 @@ spatialplotCreate <- function(
   # color = boarder color of points
   #example list of map layers: c('Stamen.Terrain','OpenTopoMap','Esri.WorldImagery','OpenStreetMap.DE')
   
+  if (is.null(species_input)) {
+    species_input <- c('cheetah')
+  }
+  
   # Calculate animal frequency by camera site
   # This would have to been done after apply all additional filters
   # Add in option to filter by two date ranges per species -- would create two datasets per species
@@ -70,18 +74,16 @@ spatialplotCreate <- function(
     date_input
   )
   
-  if (is.null(species_input)) {
-    species_input <- c('cheetah')
-  }
+
   
-  df_spA = subset(dat, Species == species_input[1])
+  df_spA = subset(df_sp, Species == species_input[1])
   dfA = count(df_spA, c('Species','Camera_Site'))
   dfA= dfA[complete.cases(dfA), ]
   # Merge with frequency data with camera trap spatial data
   dfACoor = merge(datCoor,dfA,by="Camera_Site")
   
   
-  df_spB = subset(dat, Species == species_input[2])
+  df_spB = subset(df_sp, Species == species_input[2])
   dfB = count(df_spB, c('Species','Camera_Site'))
   dfB= dfB[complete.cases(dfB), ]
   # Merge with frequency data with camera trap spatial data
