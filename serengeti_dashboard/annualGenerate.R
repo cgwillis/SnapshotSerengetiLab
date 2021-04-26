@@ -11,7 +11,7 @@ annualplotCreate <- function(
   interacting_input,
   babies_input,
   habitat_input,
-  #year_input,
+  year_input,
   y_input
 ) {
 
@@ -23,8 +23,8 @@ annualplotCreate <- function(
     filter(Eating %in% eating_input) %>%
     filter(Interacting %in% interacting_input) %>%
     filter(Babies %in% babies_input) %>%
-    filter(Habitat %in% habitat_input) #%>%
-    #filter(Year == year_input)
+    filter(Habitat %in% habitat_input) %>%
+    filter(Year == year_input)
   
   summary_data <- summary_data %>%
     mutate(Month=format(Date, '%m')) %>%
@@ -44,7 +44,7 @@ annualplotCreate <- function(
     full_join(speciesMonths) %>%
     complete(fill = list(Count = 0)) %>%
     mutate(Frequency = round(Count/sum(Count), 3))
-
+  
   
   p <- summary_data %>% 
     ggplot(aes_string(x = 'Month', y = y_input)) +
@@ -60,8 +60,9 @@ annualplotCreate <- function(
           axis.text.y = element_text(size=12),
           legend.text = element_text(size = 12),
           legend.title = element_text(face = "bold", size = 12),
-          plot.margin = unit(c(1,1,1,1), "cm")) +
-    facet_grid(rows=vars(Species), cols=vars(Year), scales='free_y')
+          plot.margin = unit(c(1,1,1,1), "cm"),
+          panel.spacing.y = unit(1, "lines")) +
+    facet_grid(rows=vars(Species), scales='free_y')
   
   return(p)
 }
