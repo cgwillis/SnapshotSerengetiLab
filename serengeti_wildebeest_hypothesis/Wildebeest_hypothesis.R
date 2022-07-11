@@ -7,26 +7,21 @@ library(lubridate)
 
 # DATA 
 # Read in data 
-Serengeti <-read.csv("S1-11_wildebeest.csv")
+Serengeti <-read.csv("S1-11_filtered_processsed.csv")
 
 # Create season variable
-Serengeti$Season <- "Inter" 
-Serengeti$Season[Serengeti$Month..1.Jan.. %in% c(6,7,8,9,10)]  <- "Dry"
-Serengeti$Season[Serengeti$Month..1.Jan.. %in% c(11,12,1,2,3,4) ] <- "Wet"
-Serengeti$Month..1.Jan.. <- as.factor(Serengeti$Month..1.Jan..)
-# Create wet and dry season datasets
-Wilde <- filter(Serengeti, Species == "wildebeest" & Season != "Inter")
+Wilde <- filter(Serengeti, Species == "wildebeest")
 
 
 # Generate lists for continuous variables
 contVarList = c("Amount.of.Shade", "Distance.to.River..m.",
                 "Distance.to.Confluence..m.","Distance.to.Kopje..m.",
                 "Tree.Density.Measure",
-                "Greeness..Dry.", "Greeness..Wet.")
+                "SeasonalGreenness")
 contVarNames = c("Shade (0-4 scale)","Distance to river (m)",
                  "Distance to confluence (m)", "Distance to kopje (m)",
                  "Ave. distance to trees (m)",
-                 "Greenness, dry season", "Greenness, wet season")
+                 "Greenness")
 
 
 caption = "Environmental values at cameras where wildebeest were recorded by month. Boxes show the interquartile range, horizontal line is the median, diamond is the mean value. Whiskers show the values of points included within 1.5 times the intnerquartile range, values outside of this range (outliers) are represented by open circles"   
@@ -84,7 +79,7 @@ server <-
         #Row 1 output
         data <- reactiveValues()
         observeEvent(input$contVar,{
-            data$plot <-  ggplot(Wilde,aes_string(x="Month..1.Jan..", y=input$contVar)) +
+            data$plot <-  ggplot(Wilde,aes_string(x="Season", y=input$contVar)) +
                 geom_boxplot(outlier.colour="black", outlier.shape=1, outlier.size=4) +
                 theme_gray(base_size = 22) +
                 ylab(contVarNames[match(input$contVar,contVarList)]) +
